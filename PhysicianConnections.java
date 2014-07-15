@@ -15,21 +15,21 @@ public class PhysicianConnections {
 		
 		//initial an arrayList of physicianList including informations about each physician;
 		ArrayList<physician> physicianList = new ArrayList<physician>();
-		Scanner readin = new Scanner(new File("net2011.txt"));
+		Scanner readin = new Scanner(new File("net2010.txt"));
 		
 		String title = readin.nextLine();
 		
 		System.out.println("The titles:" +title);
 		
 		
-		physician firstPhy = new physician(readin.nextInt(), readin.nextInt(), readin.nextInt(), readin.next());
+		physician firstPhy = new physician(readin.nextInt(), readin.next(), readin.nextInt(), readin.next());
 		firstPhy.addOrg(firstPhy.getImsid());
 		
 		physicianList.add(firstPhy);
 		
 		while(readin.hasNext()){
 			int year = readin.nextInt();
-			int pid = readin.nextInt();
+			String pid = readin.next();
 			int org = readin.nextInt();
 			String imsid = readin.next();
 		
@@ -45,7 +45,7 @@ public class PhysicianConnections {
 			//just add the ims-orgnization-id into the org-list of that physician
 			//else, we got a new physician, so add the ims-id to his/her org-list
 			//then add this new physician to the physician arrayList;
-			if(currPhy.getPid() == frontPhy.getPid()){
+			if(currPhy.getPid().equals( frontPhy.getPid() )){
 				frontPhy.addOrg(currPhy.getImsid());
 				
 			} else {
@@ -136,7 +136,7 @@ public class PhysicianConnections {
 	private static void printPhysician(physician physi) {
 		// TODO printout physician information
 		int year = physi.getYear();
-		int pid = physi.getPid();
+		String pid = physi.getPid();
 		int orgn = physi.getOrg_n();
 		int connections = physi.getConn();
 		
@@ -161,14 +161,14 @@ public class PhysicianConnections {
 class physician{
 	
 	private int year;
-	private int pid;
+	private String pid;
 	private int org_n;
 	private String imsid;
 	private ArrayList<String> imsidList = new ArrayList<String>();
 	
 	private int connections;
 	
-	public physician(int year, int pid, int org_n, String imsid){
+	public physician(int year, String pid, int org_n, String imsid){
 		
 		super();
 		this.year = year;
@@ -183,7 +183,7 @@ class physician{
 		
 	}
 	
-	public int getPid(){
+	public String getPid(){
 		return pid;
 	}
 	
